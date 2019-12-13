@@ -4,21 +4,32 @@ from random import randint
 from time import perf_counter
 
 
-state = True
-while state:
-    print("Enter your passcode of choice")
-    try:
-        passcode = int(input())
-        print("passcode sucsesfully set")
-        state = False
-    except:
-        print("Only numbers are allowed")
+passcode = "X"
+PassState = True
+CheckState = True
+
+def passcode_set():
+    global passcode
+    global state
+
+    while PassState:
+        print("Enter your passcode of choice")
+        try:
+            passcode = int(input())
+            print("passcode sucsesfully set")
+            PassState = False
+        except:
+            print("Only numbers are allowed")
 
 def passcode_check():
-    State = True
+    global CheckState
+
+    CheckState = True
     Passcode_count = 0
+
     print("Enter auth")
-    while State:
+
+    while CheckState:
         try:
             passcode_input = int(input())
         except:
@@ -26,15 +37,15 @@ def passcode_check():
 
         if passcode_input == passcode:
             print("Correct passcode, acces granted")
-            State = False
+            CheckState = False
         else:
             print("passcode incorrect")
             Passcode_count += 1
             if Passcode_count == 3:
                 print("Too many tries")
-                State = False
+                CheckState = False
             else:
                 pass
         
-
+passcode_set()
 passcode_check()
