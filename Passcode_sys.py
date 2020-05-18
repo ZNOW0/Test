@@ -1,22 +1,19 @@
-import random
-import time
-from random import randint
-from time import perf_counter
-
-
 passcode = "X"
-passcode_input = "X"
+Pass = "X"
 PassState = True
 CheckState = True
+
 
 def passcode_set():
     global passcode
     global PassState
-
+    global Pass
 
     while PassState:
         try:
-            passcode = int(input("Enter passcode of choice:"))
+            Pass = open("password.txt", "w+")
+            Pass.write(str(input("Enter passcode of choice:")))
+            Pass.close()
             PassState = False
             print("passcode sucsesfully set")
         except:
@@ -24,19 +21,25 @@ def passcode_set():
 
 def passcode_check():
     global CheckState
-    global passcode_input
+    global passcode
+    global Pass
+
+
+    Pass = open("password.txt", "r+")
+    passcode = Pass.read()
+    Pass.close()
+
 
     CheckState = True
     Passcode_count = 0
 
-
     while CheckState:
         try:
-            passcode_input = int(input("Enter passcode for auth:"))
+            pass = int(input("Enter passcode for auth:"))
         except:
             pass
 
-        if passcode_input == passcode:
+        if passcode == pass:
             print("Correct passcode, acces granted")
             CheckState = False
         else:
@@ -47,12 +50,3 @@ def passcode_check():
                 print("Too many tries")
             else:
                 pass
-        
-
-def pass_save():
-    Pass = open("password.txt", "w+")
-    Pass.write(str(passcode_input))
-    Pass.close()
-
-passcode_set()
-passcode_check()
