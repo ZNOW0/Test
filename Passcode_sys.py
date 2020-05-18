@@ -73,7 +73,3 @@ if status == "1":
 else:
     passcode_set()
 
-if Granted == True:
-    import tt
-else:
-    pass
