@@ -1,3 +1,4 @@
+
 Status_create = open("Status.txt", "a+")
 Status_create.close()
 
@@ -51,7 +52,7 @@ def passcode_check():
             pass
 
         if passcode == Pass:
-            print("Correct passcode, acces granted")
+            print("Correct passcode, access  granted")
             CheckState = False
             Granted = True
         else:
@@ -63,6 +64,11 @@ def passcode_check():
             else:
                 pass
 
+def Pass_reset():
+    New_password = str(input("Enter new password: "))
+    Reset = open("password.txt", "w+")
+    Reset.write(New_password)
+    Reset.close()
 
 Status_read = open("Status.txt", "r+")
 status = Status_read.read()
@@ -73,3 +79,13 @@ if status == "1":
 else:
     passcode_set()
 
+if CheckState == False:
+    print("""Choose an option from the menu
+    1: Reset password
+    2: log out""")
+    menu = str(input("Choose: "))
+    if menu == "1":
+        Pass_reset()
+    else:
+        print("Logging out")
+        pass
